@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+#board {
+    display: flex;
+}
+#feed-list {
+    width: 25%;
+    height: 100vh;
+    overflow-y: scroll;
+    background-color: #eee;
+}
+#feed-list ul li {
+    font-size: 0.9em;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+#feed-list ul li:hover {
+    color: #fff;
+    background-color: #006dcb;
+}
+#entry-list {
+    width: 25%;
+    height: 100vh;
+    overflow-y: scroll;
+}
+#entry-list ul li {
+    font-size: 0.9em;
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+#entry-list ul li:hover {
+    color: #fff;
+    background-color: #006dcb;
+}
