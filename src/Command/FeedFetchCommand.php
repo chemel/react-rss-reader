@@ -35,6 +35,7 @@ class FeedFetchCommand extends Command
         $entryRepository = $this->em->getRepository(Entry::class);
 
         $feeds = $feedRepository->findAll();
+        shuffle($feeds);
 
         foreach($feeds as $feed) {
             $output->writeln(($feed->getUrl()));
