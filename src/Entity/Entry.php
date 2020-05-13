@@ -41,14 +41,14 @@ class Entry
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      * @Groups({"entry:read", "entry:write"})
      */
    
     private $permalink;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      * @Groups({"entry:read", "entry:write"})
      */
     private $title;
