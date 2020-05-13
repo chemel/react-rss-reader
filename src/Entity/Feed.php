@@ -63,7 +63,7 @@ class Feed
      * @ORM\Column(type="boolean")
      * @Groups({"feed:read", "feed:write"})
      */
-    private $enabled;
+    private $enabled = true;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
