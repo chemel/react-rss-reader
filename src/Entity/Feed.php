@@ -82,6 +82,11 @@ class Feed
      */
     private $entries;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\FeedCategory", inversedBy="feed")
+     */
+    private $category;
+
     public function __construct()
     {
         $this->entries = new ArrayCollection();
@@ -189,5 +194,17 @@ class Feed
     public function setCreatedAtValue()
     {
         $this->createdAt = new \DateTime();
+    }
+
+    public function getCategory(): ?FeedCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?FeedCategory $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }
