@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Feed;
+use App\Entity\FeedCategory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,18 +37,32 @@ class FeedImportCommand extends Command
         // Parse the xml file
         $xml = new \SimpleXMLElement(file_get_contents($filename));
 
-        // Get Feed repository
+        // Get Feed & Category repository
         $feedRepository = $this->em->getRepository(Feed::class);
+        $feedCategoryRepository = $this->em->getRepository(FeedCategory::class);
+        // Caching all categories
+        $feedCategoryRepository->findAll();
 
         // Foreach Categories
         foreach($xml->body->outline as $xmlNodeCategory) {
 
             $attributes = $xmlNodeCategory->attributes();
 
-            $categoryTitle = (string) $attributes->title;
+            $categoryTitle = trim((string) $attributes->title);
 
             $output->writeLn('');
-            $output->writeLn('Category : ' . (string) $categoryTitle);
+            $output->writeLn('Category : ' . $categoryTitle);
+
+            // Check if category exist
+            $category = $feedCategoryRepository->findOneBy(['name' => $categoryTitle]);
+
+            // If not exist, create it !
+            if(!$category) {
+                $category = new FeedCategory();
+                $category->setName($categoryTitle);
+                $this->em->persist($category);
+                $this->em->flush();
+            }
 
             // Foreach Feeds
             foreach($xmlNodeCategory->outline as $xmlNodeFeed) {
@@ -66,12 +81,15 @@ class FeedImportCommand extends Command
                     $feed = new Feed();
                     $feed->setTitle((string) $attributes->title);
                     $feed->setUrl($url);
+
+                    $feed->setCategory($category);
     
                     // Save the Feed in database
                     $this->em->persist($feed);
-                    $this->em->flush();
                 }
             }
+
+            $this->em->flush();
         }
 
         return 0;
