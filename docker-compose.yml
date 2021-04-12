@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  apache:
+    build: ./docker/build/apache
+    container_name: react-rss-reader-php
+    ports:
+      - "8000:80"
+    depends_on:
+      - mysql
+    volumes:
+      - ./docker/conf/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf:ro
+      - .:/var/www/symfony
+
+  mysql:
+    image: mysql:5.7
+    container_name: react-rss-reader-mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: symfony
