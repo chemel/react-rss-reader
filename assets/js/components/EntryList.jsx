@@ -1,62 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import EntryApi from "../services/EntryApi";
 
-class EntryList extends React.Component {
+function EntryList(props) {
+    const [entries, setEntries] = useState([]);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            error: null,
-            isLoaded: false,
-            items: []
-        };
-    };
-
-    async fetch() {
+    async function getEntries(feedId) {
+        if(feedId === null) {
+            return;
+        }
         try {
-            var data = [];
-            if (this.props.feed !== null) {
-                data = await EntryApi.findByFeed(this.props.feed);
-            }
-            else {
-                data = await EntryApi.findAll();
-            }
-            this.setState({
-                isLoaded: true,
-                items: data
-            });
+            const data = await EntryApi.findByFeed(feedId);
+            setEntries(data);
         } catch (error) {
-            console.log('Unable to fetch entries list : ' + error);
-            this.setState({
-                isLoaded: true,
-                items: [],
-                error
-            });
-        }
-    };
-
-    componentDidMount() {
-        this.fetch();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.feed !== prevProps.feed) {
-            this.fetch();
+            console.log('Unable to feed entries list');
         }
     }
 
-    render() {
-        return (
-            <div id="entry-list">
-                <ul>
-                    {this.state.items.map(entry => (
-                        <li key={entry.id} data-id={entry.id}>{entry.title}</li>
-                    ))}
-                </ul>
-            </div>
-        );
-    }
-};
+    useEffect(() => {
+        getEntries(props.feedId);
+    }, [props.feedId]);
+
+    return (
+        <div id="entry-list">
+            <ul>
+                {entries.map(entry => (
+                    <li key={entry.id}>{entry.title}</li>
+                ))}
+            </ul>
+        </div>
+    );
+}
 
 export default EntryList;

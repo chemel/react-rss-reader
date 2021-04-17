@@ -1,49 +1,31 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import FeedApi from "../services/FeedApi";
 
-class FeedList extends React.Component {
+function FeedList(props) {
+    const [feeds, setFeeds] = useState([]);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            error: null,
-            isLoaded: false,
-            items: []
-        };
-    };
-
-    async fetch() {
+    async function getFeeds() {
         try {
             const data = await FeedApi.findAll();
-            this.setState({
-                isLoaded: true,
-                items: data
-            });
+            setFeeds(data);
         } catch (error) {
-            console.log('Unable to fetch feed list');
-            this.setState({
-                isLoaded: true,
-                error
-            });
+            console.log('Unable to fetch feeds list');
         }
     };
 
-    componentDidMount() {
-        this.fetch();
-    }
+    useEffect(() => {
+        getFeeds();
+    }, []);
 
-    render() {
-        return (
-            <div id="feed-list">
-                <ul>
-                    {this.state.items.map(feed => (
-                        <li key={feed.id} data-id={feed.id} onClick={ () => this.props.selectFeed(feed.id) }>{feed.title}</li>
-                    ))}
-                </ul>
-            </div>
-        );
-    }
-};
+    return (
+        <div id="feed-list">
+            <ul>
+                {feeds.map(feed => (
+                    <li key={feed.id} onClick={() => props.setFeedId(feed.id)}>{feed.title}</li>
+                ))}
+            </ul>
+        </div>
+    );
+}
 
 export default FeedList;
