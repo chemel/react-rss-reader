@@ -20,11 +20,16 @@ function EntryList(props) {
         getEntries(props.feedId);
     }, [props.feedId]);
 
+    function handleClick(entry) {
+        props.setEntryId(entry.id);
+        entry.readed = true;
+    }
+
     return (
         <div id="entry-list">
             <ul>
                 {entries.map(entry => (
-                    <li key={entry.id} className={entry.readed == null ? 'unread' : ''} onClick={() => props.setEntryId(entry.id)}>{entry.title}</li>
+                    <li key={entry.id} className={entry.readed == null ? 'unread' : ''} onClick={() => handleClick(entry)}>{entry.title}</li>
                 ))}
             </ul>
         </div>
