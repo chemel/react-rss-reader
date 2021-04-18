@@ -24,7 +24,7 @@ function Entry(props) {
         <div id="entry">
             {entry &&
                 <>
-                    <h1>{ entry.title }}</h1>
+                    <h1>{ entry.title }</h1>
                     <p><a target="_blank" href={ entry.permalink }>{ entry.permalink }</a></p>
                     <div className="entry-content">
                         {entry.content}
