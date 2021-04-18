@@ -24,7 +24,7 @@ function EntryList(props) {
         <div id="entry-list">
             <ul>
                 {entries.map(entry => (
-                    <li key={entry.id} onClick={() => props.setEntryId(entry.id)}>{entry.title}</li>
+                    <li key={entry.id} className={entry.readed == null ? 'unread' : ''} onClick={() => props.setEntryId(entry.id)}>{entry.title}</li>
                 ))}
             </ul>
         </div>

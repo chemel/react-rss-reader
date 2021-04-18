@@ -1,7 +1,4 @@
-body {
-    margin: 0;
-}
-ul {
+* {
     margin: 0;
     padding: 0;
 }
@@ -12,7 +9,7 @@ li {
     display: flex;
 }
 #feed-list {
-    width: 25%;
+    width: 25vw;
     height: 100vh;
     overflow-y: scroll;
     background-color: #eee;
@@ -27,7 +24,7 @@ li {
     background-color: #006dcb;
 }
 #entry-list {
-    width: 25%;
+    width: 25vw;
     height: 100vh;
     overflow-y: scroll;
 }
@@ -39,4 +36,13 @@ li {
 #entry-list ul li:hover {
     color: #fff;
     background-color: #006dcb;
+}
+#entry-list li.unread {
+    font-weight: bold;
+}
+#entry {
+    width: 50vw;
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 1rem;
 }
