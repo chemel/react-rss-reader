@@ -14,6 +14,12 @@ function Entry(props) {
         } catch (error) {
             console.log('Unable to fetch entry');
         }
+
+        try {
+            EntryApi.readed(entryId);
+        } catch (error) {
+
+        }
     }
 
     useEffect(() => {

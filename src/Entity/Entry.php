@@ -18,7 +18,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "get",
  *          "delete",
  *          "put",
- *          "patch"
+ *          "patch",
+ *          "readed"={
+ *              "method"="GET",
+ *              "path"="/entries/{id}/readed",
+ *              "controller"=App\Controller\Api\EntryReaded::class
+ *          }
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\EntryRepository")
