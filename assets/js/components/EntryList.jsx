@@ -12,7 +12,7 @@ function EntryList(props) {
             const data = await EntryApi.findByFeed(feedId);
             setEntries(data);
         } catch (error) {
-            console.log('Unable to feed entries list');
+            console.log('Unable to fetch feed entries list');
         }
     }
 
@@ -24,7 +24,7 @@ function EntryList(props) {
         <div id="entry-list">
             <ul>
                 {entries.map(entry => (
-                    <li key={entry.id}>{entry.title}</li>
+                    <li key={entry.id} onClick={() => props.setEntryId(entry.id)}>{entry.title}</li>
                 ))}
             </ul>
         </div>

@@ -16,7 +16,16 @@ async function findByFeed(id) {
         });
 }
 
+async function findById(id) {
+    return await fetch(API_BASE_URL + '/entries/{id}'.replace('{id}', id))
+        .then(response => response.json())
+        .then(json => {
+            return json
+        });
+}
+
 export default {
     findAll,
-    findByFeed
+    findByFeed,
+    findById
 };
