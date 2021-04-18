@@ -66,6 +66,12 @@ class Entry
     private $hash;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"entry:read", "entry:write"})
+     */
+    private $readed;
+
+    /**
      * @ORM\Column(type="datetime")
      * @Groups({"entry:read"})
      */
@@ -138,6 +144,18 @@ class Entry
     public function setHash(string $hash): self
     {
         $this->hash = $hash;
+
+        return $this;
+    }
+
+    public function getReaded(): ?\DateTimeInterface
+    {
+        return $this->readed;
+    }
+
+    public function setReaded(?\DateTimeInterface $readed): self
+    {
+        $this->readed = $readed;
 
         return $this;
     }
