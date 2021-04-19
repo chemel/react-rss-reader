@@ -1,28 +1,42 @@
 # react-rss-reader
-RSS News Reader build with Symfony / API Plateform / React
+RSS News Reader build with Symfony 5, API Plateform and React
 
-/!\ Work in progress
+🚨 Still in development 🚨
 
-## Launch local server
+## Installation
 
-`php -S 127.0.0.1:8000 -t public`
-
-## React ressources
-
-https://symfony.com/doc/current/frontend/encore/simple-example.html
-
-https://symfony.com/doc/current/frontend/encore/reactjs.html
-
-https://fr.reactjs.org/docs/faq-ajax.html
-
-https://fr.reactjs.org/docs/faq-functions.html
-
-## Commands
-
+Start docker
+```bash
+docker-compose up -d
 ```
-yarn encore dev
-yarn encore dev --watch
-yarn encore production
 
-yarn add axios
+Install vendors with composer
+```bash
+composer install
+```
+
+Build assets with yarn
+```bash
+yarn build
+```
+
+Create the database and create the tables
+```bash
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:update --force
+```
+
+Load fixtures
+```bash
+php bin/console doctrine:fixtures:load
+```
+
+Fetch feeds
+```bash
+php bin/console app:feed:fetch
+```
+
+Open your browser
+```bash
+firefox http://localhost:8000/
 ```
