@@ -9,7 +9,7 @@ async function findAll() {
 }
 
 async function findByFeed(id) {
-    return await fetch(API_BASE_URL + '/feed/{id}/entries'.replace('{id}', id))
+    return await fetch(API_BASE_URL + '/entries?feed.id={id}'.replace('{id}', id))
         .then(response => response.json())
         .then(json => {
             return json['hydra:member']
