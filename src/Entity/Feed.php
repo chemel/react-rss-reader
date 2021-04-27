@@ -21,17 +21,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "get",
  *          "delete",
  *          "put",
- *          "patch",
- *          "entry_exists"={
- *              "method"="GET",
- *              "path"="/feeds/{id}/entry/exists",
- *              "controller"=App\Controller\Api\FeedEntryExists::class
- *          },
- *          "get_entries"={
- *              "method"="GET",
- *              "path"="/feed/{id}/entries",
- *              "controller"=App\Controller\Api\EntryByFeed::class
- *          }
+ *          "patch"
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\FeedRepository")
